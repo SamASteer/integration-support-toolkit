@@ -1,11 +1,28 @@
-# Integration Support Toolkit
+# Integration Support Toolkit (Python)
 
-This project is a small internal toolkit simulating how a Customer Success or Technical Support Engineer investigates API integration issues.
+## What this does
+A small Python tool that:
+- Calls a public REST API
+- Validates response data
+- Handles API failures gracefully
+- Produces structured, timestamped logs
 
-It focuses on:
-- Replaying API requests
-- Inspecting responses and errors
-- Validating JSON payloads
-- Supporting investigation and troubleshooting workflows
+## Why this exists
+This project simulates real-world integration and support scenarios where:
+- External APIs can fail
+- Responses may be malformed
+- Clear logs are required for investigation and escalation
 
-Built as a learning and demonstration project.
+## How to run
+1. Install dependencies:
+   pip install requests
+
+2. Run:
+   python scripts/main.py
+
+## Skills demonstrated
+- API consumption (REST, JSON)
+- Defensive coding
+- Error handling
+- Logging
+- Basic project structure
