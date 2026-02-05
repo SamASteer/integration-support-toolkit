@@ -1,3 +1,4 @@
+from db import init_db
 from logger import log
 from api_client import fetch_data
 import json
@@ -8,7 +9,7 @@ def load_config():
 
 def main():
     config = load_config()
-
+    init_db()
     try:
         data = fetch_data(config["api_url"], config["timeout"])
     except Exception as e:
