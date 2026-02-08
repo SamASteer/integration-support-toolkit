@@ -26,3 +26,17 @@ This project simulates real-world integration and support scenarios where:
 - Error handling
 - Logging
 - Basic project structure
+
+## Real-world relevance
+This project simulates common integration scenarios faced by
+Customer Success Engineers and Integration Support roles, including:
+- API outages
+- Invalid payloads
+- Partial failures
+- Customer impact analysis
+
+## Investigation workflow
+1. Run integration
+2. Persist results
+3. Query affected users
+4. Escalate with evidence
