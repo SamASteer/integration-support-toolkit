@@ -1,5 +1,6 @@
 {
 "api_url":"https://jsonplaceholder.typicode.com/users",
-"timeout":5
+"timeout":5,
+"simulate_failure": false
 }
 
