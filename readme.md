@@ -35,6 +35,11 @@ Customer Success Engineers and Integration Support roles, including:
 - Partial failures
 - Customer impact analysis
 
+## Real-World Scenarios Handled
+- **Network Flakiness**: Implemented a 3-attempt retry logic with delays to handle transient API failures.
+- **Data Integrity**: Validates the presence of 'id', 'name', and 'email' before database entry to prevent system corruption.
+- **Auditability**: Every attempt is logged and stored in SQLite, allowing support teams to answer: "Which records failed and why?"
+
 ## Investigation workflow
 1. Run integration
 2. Persist results

@@ -9,25 +9,33 @@ def load_config():
         return json.load(f)
 
 def main():
-    config = load_config()
-    init_db()
+    config = load_config() #
+    init_db() #
     from db import save_result
-    if config.get("simulate_failure"):
-        raise Exception("Simulated API failure")
-
+    
     try:
-        data = fetch_data(config["api_url"], config["timeout"])
+        data = fetch_data(config["api_url"], config["timeout"]) #
     except Exception as e:
-        log("error", f"API request failed: {e}")
+        log("error", f"CRITICAL: Integration failed to start: {e}")
         return
 
+    # Process records
     for user in data:
-        if "id" in user and "name" in user and "email" in user:
+        # Validation logic
+        if all(k in user for k in ("id", "name", "email")):
             save_result(user["id"], user["name"], user["email"], "success")
             log("info", f"Stored user {user['id']}")
         else:
-            save_result(None, None, None, "invalid")
-            log("error", "Invalid user record")
+            save_result(None, None, None, "invalid_data")
+            log("error", "Found malformed user record")
+
+    # Final Polish: The Stakeholder Summary
+    print("\n" + "="*30)
+    log("info", "RUN COMPLETE - GENERATING SUMMARY")
+    results = count_by_status() #
+    for status, count in results:
+        print(f"STATUS: {status.upper():<15} | COUNT: {count}")
+    print("="*30)
 
 
 
