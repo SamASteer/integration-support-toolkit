@@ -20,14 +20,17 @@ def main():
         return
 
     # Process records
+# Process records
     for user in data:
-        # Validation logic
-        if all(k in user for k in ("id", "name", "email")):
-            save_result(user["id"], user["name"], user["email"], "success")
+        required_fields = ["id", "name", "email"]
+        missing = [field for field in required_fields if field not in user]
+
+        if not missing:
+            save_result(user['id'], user['name'], user['email'], "success")
             log("info", f"Stored user {user['id']}")
         else:
             save_result(None, None, None, "invalid_data")
-            log("error", "Found malformed user record")
+            log("error", f"Malformed user record: missing {', '.join(missing)}")
 
     # Final Polish: The Stakeholder Summary
     print("\n" + "="*30)
