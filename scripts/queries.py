@@ -5,9 +5,9 @@ def count_by_status():
     cursor = conn.cursor()
 
     cursor.execute("""
-        SELECT status, COUNT(*)
-        FROM api_results
-        GROUP BY status
+        SELECT user_id 
+        FROM api_results 
+        WHERE status = 'invalid_data';
     """)
 
     results = cursor.fetchall()
