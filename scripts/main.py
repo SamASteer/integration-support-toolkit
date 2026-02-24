@@ -9,17 +9,16 @@ def load_config():
         return json.load(f)
 
 def main():
-    config = load_config() #
+    config = load_config()
     init_db() #
     from db import save_result
     
     try:
-        data = fetch_data(config["api_url"], config["timeout"]) #
+        data = fetch_data(config["api_url"], config["timeout"])
     except Exception as e:
         log("error", f"CRITICAL: Integration failed to start: {e}")
         return
 
-    # Process records
 # Process records
     for user in data:
         required_fields = ["id", "name", "email"]
@@ -35,10 +34,15 @@ def main():
     # Final Polish: The Stakeholder Summary
     print("\n" + "="*30)
     log("info", "RUN COMPLETE - GENERATING SUMMARY")
-    results = count_by_status() #
-    for status, count in results:
-        print(f"STATUS: {status.upper():<15} | COUNT: {count}")
-    print("="*30)
+    
+    # Get the specific failures
+    from queries import get_invalid_user_ids
+    invalid_ids = get_invalid_user_ids()
+    
+    if invalid_ids:
+        log("warn", f"The following User IDs failed validation: {invalid_ids}")
+    else:
+        log("info", "All records processed successfully!")
 
 
 
